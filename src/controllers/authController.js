@@ -46,11 +46,12 @@ const authController = {
             process.env.REFRESH_TOKEN,
             { expiresIn: "30d" }
           );
+          console.log(refreshToken)
           res.cookie("rfToken", refreshToken, {
             httpOnly: true,
             maxAge: 30 * 24 * 60 * 60 * 1000,
             sameSite: "strict",
-            secure: false,
+            secure: true,
           });
           await new RefreshToken({ refreshToken }).save();
           const { hash, ...others } = user._doc;
@@ -68,10 +69,7 @@ const authController = {
   },
   refreshToken: async (req, res) => {
     try {
-      const user = jwt.verify(
-        req.cookies.rfToken,
-        process.env.REFRESH_TOKEN
-      );
+      const user = jwt.verify(req.cookies.rfToken, process.env.REFRESH_TOKEN);
       if (user) {
         const accessToken = jwt.sign(
           {
@@ -93,7 +91,7 @@ const authController = {
           httpOnly: true,
           maxAge: 30 * 24 * 60 * 60 * 1000,
           sameSite: "strict",
-          secure: false,
+          secure: true,
         });
         res.status(200).json({ accessToken });
       } else {
