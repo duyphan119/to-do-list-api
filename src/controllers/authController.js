@@ -52,6 +52,7 @@ const authController = {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             sameSite: "none",
             secure: true,
+            path:"/"
           });
           await new RefreshToken({ refreshToken }).save();
           const { hash, ...others } = user._doc;
@@ -93,6 +94,7 @@ const authController = {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           sameSite: "none",
           secure: true,
+          path:"/"
         });
         res.status(200).json({ accessToken });
       } else {
