@@ -46,7 +46,7 @@ const authController = {
             process.env.REFRESH_TOKEN,
             { expiresIn: "30d" }
           );
-          console.log(refreshToken)
+          console.log(refreshToken);
           res.cookie("rfToken", refreshToken, {
             httpOnly: true,
             maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -87,6 +87,7 @@ const authController = {
           process.env.REFRESH_TOKEN,
           { expiresIn: "30d" }
         );
+        console.log(refreshToken);
         res.cookie("rfToken", refreshToken, {
           httpOnly: true,
           maxAge: 30 * 24 * 60 * 60 * 1000,
