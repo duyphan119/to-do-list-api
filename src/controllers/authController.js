@@ -50,7 +50,7 @@ const authController = {
           res.cookie("rfToken", refreshToken, {
             httpOnly: true,
             maxAge: 30 * 24 * 60 * 60 * 1000,
-            sameSite: "strict",
+            sameSite: "none",
             secure: true,
           });
           await new RefreshToken({ refreshToken }).save();
@@ -91,7 +91,7 @@ const authController = {
         res.cookie("rfToken", refreshToken, {
           httpOnly: true,
           maxAge: 30 * 24 * 60 * 60 * 1000,
-          sameSite: "strict",
+          sameSite: "none",
           secure: true,
         });
         res.status(200).json({ accessToken });
